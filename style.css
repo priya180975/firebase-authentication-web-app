@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #3131318f;
+}
+
+.container{
+    background-color: #121212;
+    width: 50%;
+    padding: 4rem;
+    color: #fff;
+    border-radius: 1.5rem;
+}
+
+.heading{
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-weight: bold;
+    margin: 1rem 0;
+}
+
+.alter{
+    color: gray;
+    font-size: 0.8rem;
+}
+
+.alter button {
+    background: none;
+    border:none;
+    color: green;
+    cursor: pointer;
+}
+
+.inputs{
+    background: #3b3b3b3b;
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+label{
+    font-size: 0.7rem;
+    color: grey;
+}
+
+input{
+    background: none;
+    outline: none;
+    border: none;
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+.submit-btn{
+    background: green;
+    color: #fff;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    outline: none;
+    border:none
+}
+
+
+.sign-up-page{
+    display: none;
+}
+
+
+.profile-img{
+    width: 100%;
+    height: 200px;
+}
+
+.content{
+    margin: 1rem 0;
+}
+
+.profile-head{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.profile-buttons{
+    background: green;
+    color: #fff;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    outline: none;
+    border:none
+}
+
+#profile-sign-out{
+    background: gray;
+}
+
+#profile-sign-out:hover{
+    background: green;
+}
+

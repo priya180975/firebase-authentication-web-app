@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        
+        <div class="sign-in-page">
+            <div class="heading">Log In</div>
+            <div class="alter">
+                New member? 
+                <button  id="sign-up-page-btn" >Sign Up</button>
+            </div>
+            <div class="inputs">
+                <label for="email">Email address</label>
+                <input type="email" name="email" id="email">
+            </div>
+            <div class="inputs">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password">
+            </div>
+            <button class="submit-btn" id="sign-in">Sign In</button>
+        </div>   
+
+        <div class="sign-up-page">
+            <div class="heading">Sign Up</div>
+            <div class="alter">
+                Already a member?
+                <button  id="sign-in-page-btn" >Sign In</button>
+            </div>
+            <div class="inputs">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name">
+            </div>
+            <div class="inputs">
+                <label for="surname">Surname</label>
+                <input type="text" name="surname" id="surname">
+            </div>
+            <div class="inputs">
+                <label for="email">Email address</label>
+                <input type="email" name="email" id="email">
+            </div>
+            <div class="inputs">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password">
+            </div>
+            <button class="submit-btn" id="sign-up">Sign Up</button>
+            
+        </div>
+        </div>
+    </div>
+
+    <script>
+        let signInBtn=document.querySelector("#sign-in-page-btn")
+        let signUpBtn=document.querySelector("#sign-up-page-btn")
+        let signUpPage=document.querySelector(".sign-up-page")   
+        let signInPage=document.querySelector(".sign-in-page")  
+
+        signInBtn.addEventListener("click",displaySignIn)
+        signUpBtn.addEventListener("click",displaySignUp)
+
+        function displaySignUp()
+        {
+            signUpPage.style.display="block"
+            signInPage.style.display="none"
+        }
+
+        function displaySignIn()
+        {
+            signUpPage.style.display="none"
+            signInPage.style.display="block"
+        }
+
+    </script>
+</body>
+</html>
