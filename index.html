@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Authentication</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <div class="container">
@@ -16,13 +17,17 @@
                 New member? 
                 <button  id="sign-up-page-btn" >Sign Up</button>
             </div>
+            <div class="error error-sign-in">Error</div>
             <div class="inputs">
-                <label for="email">Email address</label>
-                <input type="email" name="email" id="email">
+                <label for="sign-in-email">Email address</label>
+                <input type="email" name="sign-in-email" id="sign-in-email">
             </div>
             <div class="inputs">
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password">
+                <div class="password-input">
+                    <input type="password" name="sign-in-password" id="sign-in-password">
+                    <i class="fa-eye-slash fa-solid password-show-hide" data-name="sign-in-"></i>
+                </div>
             </div>
             <button class="submit-btn" id="sign-in">Sign In</button>
         </div>   
@@ -33,21 +38,28 @@
                 Already a member?
                 <button  id="sign-in-page-btn" >Sign In</button>
             </div>
-            <div class="inputs">
-                <label for="name">Name</label>
-                <input type="text" name="name" id="name">
+            <div class="error error-sign-up">Error</div>
+            <div class="password-warn">Password must be 8 letters long having a symbol, upper and lower case letters and a number</div>
+            <div class="names">
+                <div class="inputs">
+                    <label for="sign-up-name">Name</label>
+                    <input type="text" name="sign-up-name" id="sign-up-name" maxlength="10" required>
+                </div>
+                <div class="inputs">
+                    <label for="sign-up-surname">Surname</label>
+                    <input type="text" name="sign-up-surname" id="sign-up-surname" maxlength="10" required>
+                </div>
             </div>
             <div class="inputs">
-                <label for="surname">Surname</label>
-                <input type="text" name="surname" id="surname">
+                <label for="sign-up-email">Email address</label>
+                <input type="email" name="sign-up-email" id="sign-up-email"required>
             </div>
             <div class="inputs">
-                <label for="email">Email address</label>
-                <input type="email" name="email" id="email">
-            </div>
-            <div class="inputs">
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password">
+                <label for="sign-up-password">Password</label>
+                <div class="password-input">
+                    <input type="password" name="sign-up-password" id="sign-up-password" required>
+                    <i class="fa-eye-slash fa-solid  password-show-hide" data-name="sign-up-"></i>
+                </div>
             </div>
             <button class="submit-btn" id="sign-up">Sign Up</button>
             
@@ -55,27 +67,6 @@
         </div>
     </div>
 
-    <script>
-        let signInBtn=document.querySelector("#sign-in-page-btn")
-        let signUpBtn=document.querySelector("#sign-up-page-btn")
-        let signUpPage=document.querySelector(".sign-up-page")   
-        let signInPage=document.querySelector(".sign-in-page")  
-
-        signInBtn.addEventListener("click",displaySignIn)
-        signUpBtn.addEventListener("click",displaySignUp)
-
-        function displaySignUp()
-        {
-            signUpPage.style.display="block"
-            signInPage.style.display="none"
-        }
-
-        function displaySignIn()
-        {
-            signUpPage.style.display="none"
-            signInPage.style.display="block"
-        }
-
-    </script>
+   <script src="script.js"></script>
 </body>
 </html>

@@ -12,7 +12,6 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #3131318f;
 }
 
 .container{
@@ -27,12 +26,13 @@ body{
     font-size: 1.5rem;
     font-weight: 700;
     font-weight: bold;
-    margin: 1rem 0;
+    margin: 1rem 0 0 0;
 }
 
 .alter{
     color: gray;
     font-size: 0.8rem;
+    margin-bottom: 1rem;
 }
 
 .alter button {
@@ -42,13 +42,36 @@ body{
     cursor: pointer;
 }
 
+.error{
+    color: red;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    display: none;
+}
+
+.password-warn{
+    color: gray;
+    font-size: 0.7rem;
+    margin-bottom: 1rem;
+}
+
 .inputs{
     background: #3b3b3b3b;
-    margin: 1rem 0;
+    margin: 0 0 1rem 0;
     display: flex;
     flex-direction: column;
     padding: 1rem;
     border-radius: 1rem;
+}
+
+
+.names{
+    display: flex;
+    justify-content: space-between;
+}
+
+.names div{
+    width:49%;
 }
 
 label{
@@ -56,10 +79,18 @@ label{
     color: grey;
 }
 
+.password-input{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
 input{
     background: none;
     outline: none;
     border: none;
+    width: 100%;
     color: #fff;
     font-size: 0.9rem;
 }
@@ -111,5 +142,18 @@ input{
 
 #profile-sign-out:hover{
     background: green;
+}
+
+.socials{
+    display: flex;    
+}
+
+.socials a{
+    color: #fff;    
+    margin: 0 1rem 0 0;
+}
+
+.socials i{
+    font-size: 1rem;
 }
 
