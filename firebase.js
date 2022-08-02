@@ -51,31 +51,36 @@ function signup()
     myFun.checkPasswordValid(password,error))
     {
 
-        createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            
-            set(ref(database, 'users/' + user.uid), {
-                name: name,
-                surname:surname,
-                email: email,
-                bio:"",
-                twitter:"",
-                github:"",
-                insta:""
-            });
+        function createUser(callback)
+        {
+            createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                
+                set(ref(database, 'users/' + user.uid), {
+                    name: name,
+                    surname:surname,
+                    email: email,
+                    bio:"",
+                    twitter:"",
+                    github:"",
+                    insta:""
+                });
+                callback();
+            })
+            .catch((err) => {
+                const errorCode = err.code;
+                const errorMessage = err.message;
+                error.style.display="block"
+                let errorSplit=errorCode.split("/")[1]
+                let errorDisplay=errorSplit.split("-")
+                error.innerHTML=errorDisplay.join(" ")
+            })
+        }
 
-            console.log("user created")
-            // location.href="profile.html";
+        createUser(function(){
+            alert("user created")
         })
-        .catch((err) => {
-            const errorCode = err.code;
-            const errorMessage = err.message;
-            error.style.display="block"
-            let errorSplit=errorCode.split("/")[1]
-            let errorDisplay=errorSplit.split("-")
-            error.innerHTML=errorDisplay.join(" ")
-        });
     
     }
 }
@@ -89,23 +94,26 @@ function signin()
     if(myFun.checkEmailValid(signInEmail,error)&&
     myFun.checkPasswordValid(signInPassword,error))
     {
-        console.log("done")
+        function signInUser(callback)
+        {
+            signInWithEmailAndPassword(auth, signInEmail, signInPassword)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                callback();
+            })
+            .catch((err) => {
+                const errorCode = err.code;
+                const errorMessage = err.message;
+                error.style.display="block"
+                let errorSplit=errorCode.split("/")[1]
+                let errorDisplay=errorSplit.split("-")
+                error.innerHTML=errorDisplay.join(" ")
+            });
+        }
 
-        signInWithEmailAndPassword(auth, signInEmail, signInPassword)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            console.log("logged in");        
+        signInUser(function(){
             location.href="profile.html";
-            console.log(user)
         })
-        .catch((err) => {
-            const errorCode = err.code;
-            const errorMessage = err.message;
-            error.style.display="block"
-            let errorSplit=errorCode.split("/")[1]
-            let errorDisplay=errorSplit.split("-")
-            error.innerHTML=errorDisplay.join(" ")
-        });
 
     }
 }
@@ -177,40 +185,41 @@ onAuthStateChanged(auth, (user) => {
             let pbio=document.querySelector("#profile-bio").value
             let error=document.querySelector(".error-profile-up")
 
-              if(myFun.checkNameValid(pname,error)&&
-                myFun.checkSurnameValid(psurname,error))
-                {
-                    update(ref(database, 'users/' + user.uid), {
-                        name: pname,
-                        surname:psurname,
-                        bio:pbio,
-                        insta:pinsta,
-                        github:pgit,
-                        twitter:ptwt,
-                    })
-                    .then(() => {
-                        // Data saved successfully!
-                        console.log("saved")
-                    })
-                    .catch((error) => {
-                        // The write failed...
-                        console.log(error)
-                    });
-                }
+            if(myFun.checkNameValid(pname,error)&&
+            myFun.checkSurnameValid(psurname,error))
+            {
+                update(ref(database, 'users/' + user.uid), {
+                    name: pname,
+                    surname:psurname,
+                    bio:pbio,
+                    insta:pinsta,
+                    github:pgit,
+                    twitter:ptwt,
+                })
+                .then(() => {
+                    location.reload()
+                })
+                .catch((error) => {
+                    console.log(error)
+                });
+            }
         }
-
     } 
     else {
-        // User is signed out
-        // ...
+        let noUserDisplay=document.querySelector("#pro-head")
+        if(noUserDisplay)
+        {
+            noUserDisplay.innerHTML="User not signed in";
+            setTimeout(
+                function(){location.href="index.html"},
+                1000)
+        }
     }
 })
 
 function signOutFun()
 {
     signOut(auth).then(() => {
-        // Sign-out successful.
-        console.log("out")
         window.location="index.html"
     }).catch((error) => {
         console.log(error)
