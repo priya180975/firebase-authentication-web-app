@@ -8,7 +8,7 @@
 }
 
 body{
-    /* height: 100vh; */
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -168,4 +168,14 @@ input,textarea{
 
 #profile-bio::-webkit-scrollbar-thumb {
     background-color: rgba(169, 169, 169, 0.644);
+}
+
+
+@media(max-width:800px)
+{
+    .container{
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
 }
