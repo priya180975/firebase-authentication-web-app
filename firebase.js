@@ -1,8 +1,8 @@
 import * as myFun from "./functions.js"
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-app.js";
-import { getDatabase,set,ref,child, get} from "https://www.gstatic.com/firebasejs/9.9.1/firebase-database.js";
+import { getDatabase,set,update,ref,child, get} from "https://www.gstatic.com/firebasejs/9.9.1/firebase-database.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-analytics.js";
-import { getAuth, createUserWithEmailAndPassword ,  signInWithEmailAndPassword , onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-auth.js";
+import { getAuth, signOut, createUserWithEmailAndPassword ,  signInWithEmailAndPassword , onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDQs1uL7nNmUCE1gj15woJoV4S9ap4kNtA",
@@ -23,11 +23,19 @@ const database =getDatabase(app);
 
 let signUpFormBtn=document.querySelector("#sign-up")
 let signInFormBtn=document.querySelector("#sign-in")
+let signOutBtn=document.querySelector("#sign-out")
+
+if(signOutBtn)
+{
+    signOutBtn.addEventListener("click",signOutFun)
+}
+
 if(signUpFormBtn || signInFormBtn)
 {
     signUpFormBtn.addEventListener("click",signup)
     signInFormBtn.addEventListener("click",signin)
 }
+
 
 function signup()
 {
@@ -58,6 +66,7 @@ function signup()
             });
 
             console.log("user created")
+            // location.href="profile.html";
         })
         .catch((err) => {
             const errorCode = err.code;
@@ -86,7 +95,7 @@ function signin()
         .then((userCredential) => {
             const user = userCredential.user;
             console.log("logged in");        
-            window.location = "profile.html"
+            location.href="profile.html";
             console.log(user)
         })
         .catch((err) => {
@@ -101,18 +110,23 @@ function signin()
     }
 }
 
-
 const user = auth.currentUser;
+
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        const uid = user.uid;
+   
+        let updateInfo=document.querySelector("#save-info")
+        if(updateInfo)
+        {
+            updateInfo.addEventListener("click",infoUpdate)
+        }
 
+        const uid = user.uid;
         const dbRef = ref(getDatabase());
         get(child(dbRef, `users/${uid}`)).then((snapshot) => {
             if (snapshot.exists()) 
             {
                 const data=snapshot.val()
-                console.log(data);
 
                 let profileHead=document.querySelector("#pro-head")
                 let profileBio=document.querySelector("#pro-bio")
@@ -120,11 +134,28 @@ onAuthStateChanged(auth, (user) => {
                 let profileSocialIn=document.querySelector("#social-in")
                 let profileSocialGit=document.querySelector("#social-git")
 
-                profileHead.innerHTML=data.name+" "+data.surname
-                profileBio.innerHTML=data.bio
-                profileSocialTw.href=data.twitter;
-                profileSocialIn.href=data.insta;
-                profileSocialGit.href=data.github;
+                let profileUpdateName=document.querySelector("#profile-name")
+                let profileUpdateSurname=document.querySelector("#profile-surname")
+                let profileUpdateInstagram=document.querySelector("#profile-insta")
+                let profileUpdateTwitter=document.querySelector("#profile-twt")
+                let profileUpdateGitHub=document.querySelector("#profile-git")
+                let profileUpdateBio=document.querySelector("#profile-bio")
+
+                if(profileHead)
+                {
+                    profileHead.innerHTML=data.name+" "+data.surname
+                    profileBio.innerHTML=data.bio
+                    profileSocialTw.href=data.twitter;
+                    profileSocialIn.href=data.insta;
+                    profileSocialGit.href=data.github;
+
+                    profileUpdateName.value=data.name
+                    profileUpdateSurname.value=data.surname
+                    profileUpdateGitHub.value=data.github
+                    profileUpdateInstagram.value=data.insta
+                    profileUpdateTwitter.value=data.twitter
+                    profileUpdateBio.value=data.bio
+                }
 
             } else 
             {
@@ -135,9 +166,53 @@ onAuthStateChanged(auth, (user) => {
             console.error(error);
         });
 
-    } else {
+
+        function infoUpdate()
+        {
+            let pname=document.querySelector("#profile-name").value
+            let psurname=document.querySelector("#profile-surname").value
+            let pinsta=document.querySelector("#profile-insta").value
+            let ptwt=document.querySelector("#profile-twt").value
+            let pgit=document.querySelector("#profile-git").value
+            let pbio=document.querySelector("#profile-bio").value
+            let error=document.querySelector(".error-profile-up")
+
+              if(myFun.checkNameValid(pname,error)&&
+                myFun.checkSurnameValid(psurname,error))
+                {
+                    update(ref(database, 'users/' + user.uid), {
+                        name: pname,
+                        surname:psurname,
+                        bio:pbio,
+                        insta:pinsta,
+                        github:pgit,
+                        twitter:ptwt,
+                    })
+                    .then(() => {
+                        // Data saved successfully!
+                        console.log("saved")
+                    })
+                    .catch((error) => {
+                        // The write failed...
+                        console.log(error)
+                    });
+                }
+        }
+
+    } 
+    else {
         // User is signed out
         // ...
     }
 })
 
+function signOutFun()
+{
+    signOut(auth).then(() => {
+        // Sign-out successful.
+        console.log("out")
+        window.location="index.html"
+    }).catch((error) => {
+        console.log(error)
+    });
+}

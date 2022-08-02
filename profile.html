@@ -10,24 +10,61 @@
 </head>
 <body>
     <div class="container">
-        <img src="https://i.pinimg.com/564x/5d/8f/9d/5d8f9d9c118cf763aa51750bf2c96408.jpg" class="profile-img"> 
-        <div class="profile-head">
-            <div class="heading" id="pro-head">Name Surname</div>
-            <button class="profile-buttons">Edit Profile</button>
+
+        <div class="display-profile">
+            <img src="https://i.pinimg.com/564x/5d/8f/9d/5d8f9d9c118cf763aa51750bf2c96408.jpg" class="profile-img"> 
+            <div class="profile-head">
+                <div class="heading" id="pro-head">Name Surname</div>
+                <button class="profile-buttons" id="edit-profile-btn">Edit Profile</button>
+            </div>
+            <div class="socials">
+                <a href="#" id="social-tw"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" id="social-in"s><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" id="social-git"><i class="fa-brands fa-github"></i></a>
+            </div>
+            <div class="content" id="pro-bio">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, quidem molestiae! Doloribus delectus repellat, asperiores, vel ea similique explicabo nulla quibusdam magni velit sed praesentium vitae, soluta ex hic doloremque.
+            </div>
+            <button class="profile-buttons grey-btn" id="sign-out"> Sign out</button>
         </div>
-        <div class="socials">
-            <a href="#" id="social-tw"><i class="fa-brands fa-twitter"></i></a>
-            <a href="#" id="social-in"s><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" id="social-git"><i class="fa-brands fa-github"></i></a>
+
+        <div class="edit-profile">
+            <div class="heading">Edit Profile</div>
+            <div class="error error-profile-up">Error</div>
+            <div class="names">
+                <div class="inputs">
+                    <label for="profile-name">Name</label>
+                    <input type="text" name="profile-name" id="profile-name" maxlength="10" required>
+                </div>
+                <div class="inputs">
+                    <label for="profile-surname">Surname</label>
+                    <input type="text" name="profile-surname" id="profile-surname" maxlength="10" required>
+                </div>
+            </div>
+            <div class="inputs">
+                <label for="profile-insta">Instagram</label>
+                <input type="url" name="profile-insta" id="profile-insta" >
+            </div>
+            <div class="inputs">
+                <label for="profile-twt">Twitter</label>
+                <input type="url" name="profile-twt" id="profile-twt">
+            </div>
+            <div class="inputs">
+                <label for="profile-git">Github</label>
+                <input type="url" name="profile-git" id="profile-git">
+            </div>
+            <div class="inputs">
+                <label for="profile-bio">Bio</label>
+                <textarea name="profile-bio"  id="profile-bio" cols="30" rows="5"></textarea>
+            </div>
+            
+            <button class="profile-buttons" id="save-info">Save</button>
+            <button class="grey-btn profile-buttons" id="cancel-edit">Cancel</button>
         </div>
-        <div class="content" id="pro-bio">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, quidem molestiae! Doloribus delectus repellat, asperiores, vel ea similique explicabo nulla quibusdam magni velit sed praesentium vitae, soluta ex hic doloremque.
-        </div>
-        <button class="profile-buttons" id="profile-sign-out"> Sign out</button>
     </div>
     
     <script type="module" src="firebase.js"></script>
-    <!-- <script src="script.js"></script> -->
-    
+    <script src="profile.js"></script>
+
 </body>
 </html>

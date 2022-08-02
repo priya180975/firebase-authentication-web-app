@@ -8,7 +8,7 @@
 }
 
 body{
-    height: 100vh;
+    /* height: 100vh; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,13 +20,14 @@ body{
     padding: 4rem;
     color: #fff;
     border-radius: 1.5rem;
+    margin: 4rem 0;
 }
 
 .heading{
     font-size: 1.5rem;
     font-weight: 700;
     font-weight: bold;
-    margin: 1rem 0 0 0;
+    margin: 1rem 0 0.5rem 0;
 }
 
 .alter{
@@ -86,13 +87,14 @@ label{
     cursor: pointer;
 }
 
-input{
+input,textarea{
     background: none;
     outline: none;
     border: none;
     width: 100%;
     color: #fff;
     font-size: 0.9rem;
+    resize: none;
 }
 
 .submit-btn{
@@ -110,6 +112,9 @@ input{
     display: none;
 }
 
+.edit-profile{
+    display: none;
+}
 
 .profile-img{
     width: 100%;
@@ -136,11 +141,11 @@ input{
     border:none
 }
 
-#profile-sign-out{
+.grey-btn{
     background: gray;
 }
 
-#profile-sign-out:hover{
+.grey-btn:hover{
     background: green;
 }
 
@@ -157,3 +162,10 @@ input{
     font-size: 1rem;
 }
 
+#profile-bio::-webkit-scrollbar {
+    width: 0.2rem;
+}
+
+#profile-bio::-webkit-scrollbar-thumb {
+    background-color: rgba(169, 169, 169, 0.644);
+}
