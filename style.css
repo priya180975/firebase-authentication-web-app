@@ -173,9 +173,17 @@ input,textarea{
 
 @media(max-width:800px)
 {
+    body{
+        background-color: #121212;
+    }
     .container{
         width: 100%;
         height: 100%;
         border-radius: 0;
+        padding: 0 3rem;
     }
+    .container .edit-profile{
+        padding: 1rem;
+    }
+
 }
